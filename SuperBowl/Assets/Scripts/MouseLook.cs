@@ -27,7 +27,7 @@ public class MouseLook : MonoBehaviour
         currentX = Mathf.SmoothDamp(currentX, xRot, ref xRotationV, lookSmoothDamp); //moves float value from current to desired value over time
         currentY = Mathf.SmoothDamp(currentY,yRot, ref yRotationV, lookSmoothDamp);
 
-        xRot = Mathf.SmoothDamp(xRot, -80, 80); // restricts xRotation value to be in between -80 and 80, prevents backflip
+        xRot = Mathf.Clamp(xRot, -80, 80); // restricts xRotation value to be in between -80 and 80, prevents backflip
         transform.rotation = Quaternion.Euler(-currentX, currentY, 0); //setting rotation of camera according to mouse input
     }
 }
