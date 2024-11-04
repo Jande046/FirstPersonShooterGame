@@ -35,6 +35,7 @@ void Start()
     rb.freezeRotation = true;
 
     readyToJump = true;
+    ResetJump();
 }
 
   // Update is called once per frame
