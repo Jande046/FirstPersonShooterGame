@@ -9,6 +9,8 @@ public class InputManager : MonoBehaviour
     public PlayerInput.OnFootActions onFoot;
     private PlayerMotor motor;
     private PlayerLook look;
+    private Weapon weapon;
+    //private PlayerShoot shoot;
     // Start is called before the first frame update
     void Awake()
     {
@@ -16,8 +18,10 @@ public class InputManager : MonoBehaviour
         onFoot = playerInput.OnFoot;
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
+        weapon = GetComponent<Weapon>();
         onFoot.Jump.performed += ctx => motor.Jump();
         onFoot.Sprint.performed += ctx => motor.Sprint();
+        onFoot.Shoot.performed += ctx => weapon.Shoot();
         
     }
 
@@ -27,6 +31,10 @@ public class InputManager : MonoBehaviour
     {
         //tell player motor to move using value from our movement action
         motor.ProcessMove(onFoot.Movement.ReadValue<Vector2>());
+         if (onFoot.Shoot.ReadValue<float>() > 0) // Fire button is pressed
+    {
+        weapon.Shoot();
+    }
 
     }
 

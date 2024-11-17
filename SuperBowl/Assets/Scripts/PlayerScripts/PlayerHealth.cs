@@ -7,8 +7,10 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+    
     private float health;
     private float lerpTimer;
+    [Header("Health Bar")]
     public float maxHealth = 100f;
     public float chipSpeed = 2f; // how long it take health bar to cathc up
     public Image frontHealthBar;
@@ -29,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void UpdateHealthUI()
     {
-        Debug.Log(health);
+        //Debug.Log(health);
         float fillF = frontHealthBar.fillAmount;
         float fillB = backHealthBar.fillAmount;
         float hFraction = health / maxHealth;
@@ -53,15 +55,25 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void TakeDamge(float damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         lerpTimer = 0f;
+        if(health <= 0)
+        {
+            Die();
+        }
     }
 
     public void RestoreHealth(float healAmount)
     {
         health += healAmount;
         lerpTimer = 0f;
+    }
+
+    public void Die()
+    {
+        Debug.Log("Player has died");
+         gameObject.SetActive(false);
     }
 }
