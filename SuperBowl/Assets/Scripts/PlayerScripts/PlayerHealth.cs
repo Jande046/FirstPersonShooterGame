@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
     public float chipSpeed = 2f; // how long it take health bar to cathc up
     public Image frontHealthBar;
     public Image backHealthBar;
+    public TextMeshProUGUI healthText;
     // Start is called before the first frame update
     void Start()
     {
