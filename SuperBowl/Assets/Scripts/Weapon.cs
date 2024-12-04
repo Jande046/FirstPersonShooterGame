@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
     public GameObject projectilePrefab;
     public Transform firePoint;
     public float projectileSpeed = 20f;
+    
     private float nextFireTime = 0f;
 
 public void Shoot()
@@ -50,6 +51,6 @@ private void FireProjectile()
             rb.velocity = firePoint.forward * projectileSpeed;
         }
 
-        //Debug.Log("Projectile Fired!");
+
 }
 }

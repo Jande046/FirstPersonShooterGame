@@ -2,30 +2,19 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public float maxHealth = 100f;
-    private float currentHealth;
+    public float health = 50f;
 
-    void Start()
+    public void TakeDamage(float amount)
     {
-        currentHealth = maxHealth; // Initialize health
-    }
-
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-
-        Debug.Log(gameObject.name + " took damage:" + damage + "remaining health" + currentHealth);
-
-        if (currentHealth <= 0)
+        health -= amount;
+        if(health <= 0f)
         {
             Die();
         }
     }
 
-    private void Die()
+    void Die()
     {
-        Debug.Log("Enemy died!");
-        Destroy(gameObject); // Destroy the enemy when its health reaches zero
+        Destroy(gameObject);
     }
 }

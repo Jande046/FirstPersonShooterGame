@@ -4,7 +4,7 @@ public class Projectile : MonoBehaviour
 {
     [Header("Projectile Settings")]
     public float lifetime = 5f; // Time in seconds before the projectile disappears
-    public float projectileDamage = 10f; // Damage the projectile deals to the enemy
+    public float projectileDamage = 10f;
 
     void Start()
     {
@@ -13,28 +13,31 @@ public class Projectile : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-    {
-        // Check if the projectile collides with an enemy
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            // Get the Health component of the enemy and apply damage
-            EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
-            if (enemyHealth != null)
-            {
-                enemyHealth.TakeDamage(projectileDamage); // Apply damage to enemy
-                Debug.Log("Enemy hit! Damage applied: " + projectileDamage);
-            }
-            else
-            {
-                Debug.LogWarning("Enemy does not have an EnemyHealth component.");
-            }
+{
+    Debug.Log("Projectile collided with: " + collision.gameObject.name + ", Tag: " + collision.gameObject.tag);
 
-            // Destroy the projectile after it hits the enemy
-            Destroy(gameObject);
-        }
-        else
+    if (collision.gameObject.CompareTag("Enemy"))
+    {
+        // Damage logic for the enemy
+        EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
+        if (enemyHealth != null)
         {
-            Debug.Log("Projectile hit non-enemy: " + collision.gameObject.name);
+            enemyHealth.TakeDamage(projectileDamage);
+            Debug.Log("Enemy hit. Damage applied: " + projectileDamage);
         }
     }
+    else if (collision.gameObject.CompareTag("Player"))
+    {
+        // Ignore the player
+        Debug.Log("Projectile hit the player, ignoring...");
+    }
+    else
+    {
+        Debug.Log("Projectile hit non-enemy: " + collision.gameObject.name);
+    }
+
+    // Destroy the projectile itself, not the collided object
+    Destroy(gameObject);
+}
+
 }
