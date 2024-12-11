@@ -29,6 +29,8 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         UpdateScoreUI(); // Initialize the UI
+      
+
     }
 
     public void AddPoints(int points)

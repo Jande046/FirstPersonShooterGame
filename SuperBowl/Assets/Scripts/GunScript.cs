@@ -8,18 +8,37 @@ public class GunScript : MonoBehaviour
     public float fireRate = 0.5f;
     public Camera fpsCam;
 
-   public float sphereRadius = 0.5f; // Adjust the radius as needed
-    
-
-    
-
+    public float sphereRadius = 0.5f; // Adjust the radius as needed
     public float nextFireTime = 0f;
 
-    
-    
+    [Header("Audio")]
+    public AudioSource audioSource; // Reference to the AudioSource
+    public AudioClip shootSound;    // The gunfire sound effect
+
+        private void Start()
+    {
+        // Ensure the AudioSource is assigned
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                Debug.LogError("AudioSource component is missing! Please add one to the gun.");
+            }
+        }
+    }
+
 
     public void Shoot()
     {
+        
+
+        // Play the gunfire sound
+        if (audioSource != null && shootSound != null)
+        {
+            audioSource.PlayOneShot(shootSound);
+        }
+
        // Visualize SphereCast for debugging
     Debug.DrawRay(fpsCam.transform.position, fpsCam.transform.forward * range, Color.red, 1f);
 
@@ -49,7 +68,7 @@ public class GunScript : MonoBehaviour
             hitInfo.rigidbody.AddForce(-hitInfo.normal * impactForce, ForceMode.Impulse);
         }
 
-          GetComponent<GunSound>().PlayGunshotSound();
+           
     }
     
         

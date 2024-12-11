@@ -15,9 +15,6 @@ public class Enemy : MonoBehaviour
         ScoreManager.Instance.AddPoints(pointValue); // Award points
 
         // Trigger the event when the enemy is destroyed
-        if (OnEnemyDestroyed != null)
-        {
-            OnEnemyDestroyed.Invoke();
-        }
+        OnEnemyDestroyed?.Invoke();
     }
 }
