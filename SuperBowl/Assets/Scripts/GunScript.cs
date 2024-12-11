@@ -48,6 +48,8 @@ public class GunScript : MonoBehaviour
         {
             hitInfo.rigidbody.AddForce(-hitInfo.normal * impactForce, ForceMode.Impulse);
         }
+
+          GetComponent<GunSound>().PlayGunshotSound();
     }
     
         
