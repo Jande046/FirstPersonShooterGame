@@ -39,9 +39,18 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
+        
+
         // Spawn the enemy and increase the count
         GameObject newEnemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
         currentEnemyCount++;
+
+         // Set a random or specific point value for the spawned enemy
+    Enemy enemy = newEnemy.GetComponent<Enemy>();
+    if (enemy != null)
+    {
+        enemy.pointValue = Random.Range(5, 20); // Random points between 5 and 20
+    }
 
         // Subscribe to the enemy's destruction event to decrease the count
         newEnemy.GetComponent<Enemy>().OnEnemyDestroyed += HandleEnemyDestroyed;
